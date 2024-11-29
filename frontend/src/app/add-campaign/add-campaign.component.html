@@ -1,0 +1,90 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="mb-4">
+        <h2 class="fw-bold mb-1">Add New Campaign</h2>
+        <p class="text-secondary">Create a new advertising campaign</p>
+      </div>
+
+      <div class="card">
+        <div class="card-body p-4">
+          <form [formGroup]="campaignForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+              <label for="id" class="form-label fw-medium">Campaign ID</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="id" 
+                formControlName="id"
+                placeholder="Enter campaign ID"
+              >
+              <div *ngIf="campaignForm.get('id')?.touched && campaignForm.get('id')?.invalid" 
+                   class="text-danger small mt-1">
+                Campaign ID is required
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <label for="startDate" class="form-label fw-medium">Start Date</label>
+                <input 
+                  type="datetime-local" 
+                  class="form-control" 
+                  id="startDate" 
+                  formControlName="startDate"
+                >
+                <div *ngIf="campaignForm.get('startDate')?.touched && campaignForm.get('startDate')?.invalid" 
+                     class="text-danger small mt-1">
+                  Start date is required
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="endDate" class="form-label fw-medium">End Date</label>
+                <input 
+                  type="datetime-local" 
+                  class="form-control" 
+                  id="endDate" 
+                  formControlName="endDate"
+                >
+                <div *ngIf="campaignForm.get('endDate')?.touched && campaignForm.get('endDate')?.invalid" 
+                     class="text-danger small mt-1">
+                  End date is required
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="targetImpressions" class="form-label fw-medium">Target Impressions</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                id="targetImpressions" 
+                formControlName="targetImpressions"
+                placeholder="Enter target impressions"
+              >
+              <div *ngIf="campaignForm.get('targetImpressions')?.touched && campaignForm.get('targetImpressions')?.invalid" 
+                   class="text-danger small mt-1">
+                <span *ngIf="campaignForm.get('targetImpressions')?.errors?.['required']">
+                  Target impressions is required
+                </span>
+                <span *ngIf="campaignForm.get('targetImpressions')?.errors?.['min']">
+                  Target impressions must be greater than 0
+                </span>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-secondary" routerLink="/campaigns">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="!campaignForm.valid">
+                <i class="bi bi-plus-lg me-2"></i>Add Campaign
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
